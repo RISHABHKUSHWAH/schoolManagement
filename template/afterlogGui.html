@@ -1,0 +1,132 @@
+{% load static %}
+{% if user.is_authenticated %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eSkooly Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/afterloginGui.css' %}">
+</head>
+<body>
+    <!-- Navbar at the top -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="eskooly-logo.png" alt="eSkooly Logo">
+        </div>
+        <div class="menu-icon">
+            <i class="icon-menu"></i>
+        </div>
+        <div class="navbar-right">
+            <div class="app-links">
+                <a href="#"><img src="app-store.png" alt="App Store"></a>
+                <a href="#"><img src="google-play.png" alt="Google Play"></a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search">
+                <i class="icon-search"></i>
+            </div>
+            <div class="user-info">
+                <div class="dropdown">
+                    <button>Profile</button>
+                    <div class="dropdown-options">
+                      <a href="#"><img src="{% static 'images/edit.png' %}" class="userDropdropdownimg">Profile</a>
+                      <a href="#"><img src="{% static 'images/Settings.png' %}" class="userDropdropdownimg">Setting</a>
+                      <a href="{% url 'logout' %}"><img src="{% static 'images/logout.png' %}" class="userDropdropdownimg">Logout</a>
+                    </div>
+
+
+                <!-- <div class="dropdown">
+                    <span>dropdown</span>
+                    <div class="dropdown-content">
+                      <a href="#">Profile</a>
+                      <a href="#">Account Setting</a>
+                      <a href="{% url 'logout' %}">Log Out</a>
+                    </div>
+                  </div> -->
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container (Sidebar + Content) -->
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <ul class="menu">
+                <li><a href="#" class="hove"><i class="icon-home"></i> Dashboard</a></li>
+                <li><a href="#">General Settings</a></li>
+                <li><a href="#">Classes</a></li>
+                <li><a href="#">Subjects</a></li>
+                <li><a href="#">Students</a></li>
+                <li><a href="#">Employees</a></li>
+                <li><a href="#">Accounts</a></li>
+                <li><a href="#">Fees</a></li>
+                <li><a href="#">Salary</a></li>
+                <li><a href="#">Attendance</a></li>
+                <li><a href="#">Timetable</a></li>
+                <li><a href="#">Homework</a></li>
+                <li><a href="#">SMS Service</a></li>
+                <li><a href="#">Exams</a></li>
+                <li><a href="#">Reports</a></li>
+                <li><a href="#">WhatsApp</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main">
+            <div class="widgets">
+                <div class="widget total-students">
+                    <h3>Total Students</h3>
+                    <p>This Month</p>
+                    <div class="widget-number">1</div>
+                </div>
+                <div class="widget total-employees">
+                    <h3>Total Employees</h3>
+                    <p>This Month</p>
+                    <div class="widget-number">1</div>
+                </div>
+                <div class="widget revenue">
+                    <h3>Revenue</h3>
+                    <p>This Month</p>
+                    <div class="widget-number">$0</div>
+                </div>
+                <div class="widget total-profit">
+                    <h3>Total Profit</h3>
+                    <p>This Month</p>
+                    <div class="widget-number">-$33,000</div>
+                </div>
+            </div>
+
+            <!-- Statistics and Graph -->
+            <div class="statistics">
+                <h3>Statistics</h3>
+                <canvas id="chart"></canvas>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Chart.js for graph statistics
+        var ctx = document.getElementById('chart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['May 2024', 'June 2024', 'July 2024', 'August 2024', 'September 2024', 'October 2024'],
+                datasets: [{
+                    label: 'Expenses',
+                    data: [0, 0, 0, 0, 0, 28000],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)'
+                }, {
+                    label: 'Income',
+                    data: [0, 0, 0, 0, 0, 0],
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)'
+                }]
+            }
+        });
+    </script>
+</body>
+</html>
+{% endif %}
